@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Legend of Fatima | 31st Birthday Special</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <!-- Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+  <div id="lightbox" class="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <!-- Floating Music Control -->
+  <div class="music-floating-container">
+    <button id="musicToggleBtn" class="music-btn" onclick="toggleBgMusic()">
+      <span id="musicIcon">🎵</span> <span id="musicText">BGM</span>
+    </button>
+  </div>
+
+  <!-- Background Audio Tag -->
+  <audio id="bgSong" loop preload="auto">
+    <source src="assets/birthday.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ==================== MAIN DOSSIER PAGE ==================== -->
+  <div id="mainPage">
+    
+    <!-- 1. HERO SECTION -->
+    <header class="hero">
+      <div class="badge">🔥 OFFICIAL SQUAD DOSSIER</div>
+      
+      <h1 class="hero-title">The World of <span class="highlight">Noor who is our Hoor 😘</span></h1>
+      
+      <div class="tagline-wrapper">
+        <p class="tagline">"Issue Hii Bnna Diya Na Ap Ne"</p>
+        <audio id="memeAudio" src="assets/issue.mp3" preload="auto"></audio>
+        <button class="audio-btn" onclick="playMemeSound()">🔊 Play Audio</button>
+      </div>
+
+      <div class="hero-img-wrapper">
+        <img src="assets/birthday-star.jpg" alt="Fatima" class="hero-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/180?text=Fatima';">
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="countdown-card">
+        <h3>Countdown To 31st Midnight ⏳</h3>
+        <div class="timer">
+          <div class="time-box"><span id="days">00</span><p>Days</p></div>
+          <div class="time-box"><span id="hours">00</span><p>Hours</p></div>
+          <div class="time-box"><span id="mins">00</span><p>Mins</p></div>
+          <div class="time-box"><span id="secs">00</span><p>Secs</p></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. PERSONALITY STATS -->
+    <section class="stats-section">
+      <h2>The Legend's DNA 📊</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h4>Roasting Skills</h4>
+          <div class="bar-container"><div class="bar" style="width: 95%;">95%</div></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Loaded Fries Addiction</h4>
+          <div class="bar-container"><div class="bar" style="width: 100%;">100%</div></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Nakhra</h4>
+          <div class="bar-container"><div class="bar" style="width: 100%;">200%</div></div>
+        </div>
+
+        <div class="stat-card">
+          <h4>Decision Making Skill</h4>
+          <div class="bar-container"><div class="bar" style="width: 100%;">100%</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FUNNY VIDEOS VAULT -->
+    <section class="video-section">
+      <h2>Squad Video Archives 🎬</h2>
+      <p class="section-sub">Some iconic moments recorded live!</p>
+      
+      <div class="video-grid">
+        <div class="video-card">
+          <video controls poster="assets/thumb1.jpg" preload="metadata">
+            <source src="assets/video11.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="video-card">
+          <video controls poster="assets/thumb2.jpg" preload="metadata">
+            <source src="assets/video22.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. VOICE NOTES FROM THE SQUAD -->
+<!-- 4. VOICE NOTES FROM THE SQUAD -->
+    <section class="audio-messages-section">
+      <h2>Confidential Voice Notes 🎙️</h2>
+      <p class="section-sub">Tap play to listen to our secret wishes!</p>
+
+      <div class="voice-grid">
+        <div class="voice-card">
+          <div class="voice-info">
+            <h4>From: Bey Eman 😁</h4>
+            <p>Partner in Crime</p>
+          </div>
+          <audio class="voiceAudio" controls preload="metadata">
+            <source src="assets/Eman.mp3" type="audio/mpeg">
+            <source src="assets/Eman.mp3.ogg" type="audio/ogg">
+          </audio>
+        </div>
+
+        <div class="voice-card">
+          <div class="voice-info">
+            <h4>From: Simran 😂</h4>
+            <p>Late Entry Specialist</p>
+          </div>
+          <audio class="voiceAudio" controls preload="metadata">
+            <source src="assets/voice_friend2.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+
+        <div class="voice-card highlight-card">
+          <div class="voice-info">
+            <h4>From: Mahrukh 😁 - The Dev 💻</h4>
+            <p>The Mastermind Behind This Site</p>
+          </div>
+          <audio class="voiceAudio" controls preload="metadata">
+            <source src="assets/mah.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
+    </section>
+    <!-- 5. CELEBRATION BUTTON -->
+    <section class="party-zone">
+      <button id="partyBtn" onclick="triggerCelebration()">CLICK TO CUT THE CAKE & UNLOCK MEMORY LANE 🎉</button>
+    </section>
+
+  </div> <!-- MAIN PAGE END -->
+
+  <!-- ==================== NEW GALLERY PAGE (UNLOCKED ON CLICK) ==================== -->
+  <div id="galleryPage" class="hidden-page">
+    <div class="gallery-header">
+      <button class="back-btn" onclick="showMainPage()">⬅️ Back to Dossier</button>
+      <h2>Memory Lane: HBD Kuchupuchu! 👑💖</h2>
+      <p class="section-sub">12 Unfiltered Memories of the Squad</p>
+    </div>
+
+    <!-- 12 Photos Grid -->
+    <div class="photo-gallery-grid">
+      <div class="photo-card"><img src="assets/pic33.jpeg" alt="Memory 1"></div>
+      <div class="photo-card"><img src="assets/pic55.jpeg" alt="Memory 2"></div>
+      <div class="photo-card"><img src="assets/pic77.jpeg" alt="Memory 3"></div>
+      <div class="photo-card"><img src="assets/pic44.jpeg" alt="Memory 4"></div>
+      <div class="photo-card"><img src="assets/pic.2.jpg" alt="Memory 5"></div>
+      <div class="photo-card"><img src="assets/pic66.jpeg" alt="Memory 6"></div>
+      <div class="photo-card"><img src="assets/pic88.jpeg" alt="Memory 7"></div>
+      <div class="photo-card"><img src="assets/pic.3.jpg" alt="Memory 8"></div>
+      <div class="photo-card"><img src="assets/pic99.jpeg" alt="Memory 9"></div>
+      <div class="photo-card"><img src="assets/pic.1.jpg" alt="Memory 10"></div>
+      <div class="photo-card"><img src="assets/pic44.jpeg" alt="Memory 11"></div>
+      <div class="photo-card">
+        <img src="assets/pic.4.jpeg" alt="Memory 12">
+        <p>HBD Fatima! 🎂🎉</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
