@@ -141,14 +141,14 @@ document.addEventListener("DOMContentLoaded", () => {
         video.addEventListener("ended", checkAndResumeBGM);
     });
 });
-function openImage(element) {
-  var modal = document.getElementById("imageModal");
-  var fullImg = document.getElementById("fullImage");
+function openLightbox(imageSrc) {
+  var lightbox = document.getElementById("lightbox");
+  var lightboxImg = document.getElementById("lightbox-img");
   
-  modal.style.display = "flex";
-  fullImg.src = element.src;
+  lightbox.style.display = "flex"; // Modal ko show karega
+  lightboxImg.src = imageSrc;     // Click ki hui image ka link set karega
 }
 
-function closeImage() {
-  document.getElementById("imageModal").style.display = "none";
+function closeLightbox() {
+  document.getElementById("lightbox").style.display = "none";
 }
