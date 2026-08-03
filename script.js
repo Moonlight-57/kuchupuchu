@@ -1,154 +1,98 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const bgSong = document.getElementById("bgSong");
-    const memeAudio = document.getElementById("memeAudio");
-    let bgMusicEnabled = true;
-
-    if (bgSong) {
-        bgSong.volume = 0.25;
-    }
-
-    // --- 1. First User Interaction Par BGM Start Karna ---
-    function startBGM() {
-        if (bgMusicEnabled && bgSong && bgSong.paused) {
-            bgSong.play().then(() => {
-                const musicBtn = document.getElementById("musicText");
-                if (musicBtn) musicBtn.innerHTML = "Pause";
-            }).catch(() => {});
-        }
-        window.removeEventListener("click", startBGM);
-        window.removeEventListener("touchstart", startBGM);
-        window.removeEventListener("scroll", startBGM);
-    }
-
-    window.addEventListener("click", startBGM);
-    window.addEventListener("touchstart", startBGM);
-    window.addEventListener("scroll", startBGM);
-
-    // --- 2. BGM Toggle Button ---
-    window.toggleBgMusic = function() {
-        if (!bgSong) return;
-        const musicBtn = document.getElementById("musicText");
-
-        if (bgSong.paused) {
-            bgMusicEnabled = true;
-            bgSong.play().then(() => {
-                if (musicBtn) musicBtn.innerHTML = "Pause";
-            }).catch(() => {});
-        } else {
-            bgSong.pause();
-            bgMusicEnabled = false;
-            if (musicBtn) musicBtn.innerHTML = "BGM";
-        }
-    };
-
-    // --- 3. Stop All Media Helper ---
-    function stopAllMedia(except = null) {
-        if (memeAudio && memeAudio !== except) {
-            memeAudio.pause();
-            memeAudio.currentTime = 0;
-            const btn = document.querySelector(".audio-btn");
-            if (btn) btn.innerHTML = "🔊 Play Audio";
-        }
-
-        document.querySelectorAll("video").forEach(v => {
-            if (v !== except) {
-                v.pause();
-                v.currentTime = 0;
-            }
-        });
-
-        document.querySelectorAll(".voiceAudio").forEach(a => {
-            if (a !== except) {
-                a.pause();
-                a.currentTime = 0;
-            }
-        });
-    }
-
-    // --- 4. Resume BGM Check ---
-    function checkAndResumeBGM() {
-        const anyVideoPlaying = [...document.querySelectorAll("video")].some(v => !v.paused);
-        const anyVoicePlaying = [...document.querySelectorAll(".voiceAudio")].some(s => !s.paused);
-        const memePlaying = memeAudio && !memeAudio.paused;
-
-        if (!anyVideoPlaying && !anyVoicePlaying && !memePlaying && bgMusicEnabled && bgSong) {
-            bgSong.play().catch(() => {});
-        }
-    }
-
-    // --- 5. Meme Audio ---
-    window.playMemeSound = function() {
-        const button = document.querySelector(".audio-btn");
-        if (!memeAudio) return;
-
-        if (memeAudio.paused) {
-            stopAllMedia(memeAudio);
-            if (bgSong) bgSong.pause();
-            memeAudio.play().catch(() => {});
-            if (button) button.innerHTML = "⏸ Pause Audio";
-        } else {
-            memeAudio.pause();
-            memeAudio.currentTime = 0;
-            checkAndResumeBGM();
-            if (button) button.innerHTML = "🔊 Play Audio";
-        }
-    };
-
-    // --- 6. Celebration Button ---
-    window.triggerCelebration = function() {
-        if (typeof confetti === 'function') {
-            confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
-            setTimeout(() => confetti({ particleCount: 100, angle: 60, spread: 60, origin: { x: 0 } }), 200);
-            setTimeout(() => confetti({ particleCount: 100, angle: 120, spread: 60, origin: { x: 1 } }), 400);
-        }
-
-        const partyBtn = document.getElementById("partyBtn");
-        if (partyBtn) {
-            partyBtn.innerText = "🎂 UNLOCKING MEMORY LANE... 🎉";
-            partyBtn.style.background = "linear-gradient(135deg, #00f2fe, #4facfe)";
-        }
-
-        setTimeout(() => {
-            const mainPage = document.getElementById("mainPage");
-            const galleryPage = document.getElementById("galleryPage");
-            
-            if (mainPage) mainPage.style.display = "none";
-            if (galleryPage) {
-                galleryPage.style.display = "block";
-                setTimeout(() => { galleryPage.style.opacity = "1"; }, 50);
-            }
-
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        }, 1200);
-    };
-
-    // --- 7. Voice Notes & Videos Listeners ---
-    document.querySelectorAll(".voiceAudio").forEach(sound => {
-        sound.addEventListener("play", () => {
-            stopAllMedia(sound);
-            if (bgSong) bgSong.pause();
-        });
-        sound.addEventListener("pause", checkAndResumeBGM);
-        sound.addEventListener("ended", checkAndResumeBGM);
-    });
-
-    document.querySelectorAll("video").forEach(video => {
-        video.addEventListener("play", () => {
-            stopAllMedia(video);
-            if (bgSong) bgSong.pause();
-        });
-        video.addEventListener("pause", checkAndResumeBGM);
-        video.addEventListener("ended", checkAndResumeBGM);
-    });
-});
+// ==================== 1. LIGHTBOX / MODAL FUNCTION ====================
 function openLightbox(imageSrc) {
   var lightbox = document.getElementById("lightbox");
   var lightboxImg = document.getElementById("lightbox-img");
   
-  lightbox.style.display = "flex"; // Modal ko show karega
-  lightboxImg.src = imageSrc;     // Click ki hui image ka link set karega
+  if (lightbox && lightboxImg) {
+    lightbox.style.display = "flex";
+    lightboxImg.src = imageSrc;
+  }
 }
 
 function closeLightbox() {
-  document.getElementById("lightbox").style.display = "none";
+  var lightbox = document.getElementById("lightbox");
+  if (lightbox) {
+    lightbox.style.display = "none";
+  }
 }
+
+// Esc key dabane par lightbox band karne ke liye
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Escape") {
+    closeLightbox();
+  }
+});
+
+// ==================== 2. PAGE NAVIGATION & CELEBRATION ====================
+function triggerCelebration() {
+  // Confetti effect
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  }
+
+  // Switch to Gallery Page
+  document.getElementById("mainPage").style.display = "none";
+  var galleryPage = document.getElementById("galleryPage");
+  galleryPage.style.display = "block";
+  galleryPage.classList.remove("hidden-page");
+  
+  // Page scroll to top
+  window.scrollTo(0, 0);
+}
+
+function showMainPage() {
+  document.getElementById("galleryPage").style.display = "none";
+  document.getElementById("mainPage").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+// ==================== 3. AUDIO & MUSIC CONTROLS ====================
+function toggleBgMusic() {
+  var audio = document.getElementById("bgSong");
+  var icon = document.getElementById("musicIcon");
+  var text = document.getElementById("musicText");
+
+  if (audio.paused) {
+    audio.play();
+    icon.innerText = "⏸️";
+    text.innerText = "Pause";
+  } else {
+    audio.pause();
+    icon.innerText = "🎵";
+    text.innerText = "BGM";
+  }
+}
+
+function playMemeSound() {
+  var memeAudio = document.getElementById("memeAudio");
+  if (memeAudio) {
+    memeAudio.play();
+  }
+}
+
+// ==================== 4. COUNTDOWN TIMER ====================
+function updateCountdown() {
+  // Birthday date set
+  const birthdayDate = new Date("Aug 31, 2026 00:00:00").getTime();
+  const now = new Date().getTime();
+  const diff = birthdayDate - now;
+
+  if (diff > 0) {
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    if (document.getElementById("days")) document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+    if (document.getElementById("hours")) document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+    if (document.getElementById("mins")) document.getElementById("mins").innerText = mins < 10 ? '0' + mins : mins;
+    if (document.getElementById("secs")) document.getElementById("secs").innerText = secs < 10 ? '0' + secs : secs;
+  }
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
