@@ -13,10 +13,6 @@
 </head>
 
 <body>
-  <div id="lightbox" class="lightbox">
-    <span class="close-lightbox">&times;</span>
-    <img id="lightboxImg" src="" alt="">
-  </div>
 
   <!-- Floating Music Control -->
   <div class="music-floating-container">
@@ -92,19 +88,18 @@
       <h2>Squad Video Archives 🎬</h2>
       <p class="section-sub">Some iconic moments recorded live!</p>
       
- <video controls width="100%" playsinline preload="metadata">
-    <source src="Video11.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
+      <video controls width="100%" playsinline preload="metadata">
+          <source src="Video11.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
 
-<video controls width="100%" playsinline preload="metadata">
-    <source src="Video22.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-</video>
-</div>
+      <video controls width="100%" playsinline preload="metadata">
+          <source src="Video22.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+      </video>
+    </section>
 
     <!-- 4. VOICE NOTES FROM THE SQUAD -->
-<!-- 4. VOICE NOTES FROM THE SQUAD -->
     <section class="audio-messages-section">
       <h2>Confidential Voice Notes 🎙️</h2>
       <p class="section-sub">Tap play to listen to our secret wishes!</p>
@@ -116,7 +111,7 @@
             <p>Partner in Crime</p>
           </div>
           <audio class="voiceAudio" controls preload="metadata">
-            <source src="Eman.mp3" type="audio/mpeg"
+            <source src="Eman.mp3" type="audio/mpeg">
           </audio>
         </div>
 
@@ -141,6 +136,7 @@
         </div>
       </div>
     </section>
+
     <!-- 5. CELEBRATION BUTTON -->
     <section class="party-zone">
       <button id="partyBtn" onclick="triggerCelebration()">CLICK TO CUT THE CAKE & UNLOCK MEMORY LANE 🎉</button>
@@ -158,28 +154,30 @@
 
     <!-- 12 Photos Grid -->
     <div class="photo-gallery-grid">
-      <div class="photo-card"><img src="pic33.jpeg" alt="Memory 1"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic55.jpeg" alt="Memory 2"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic77.jpeg" alt="Memory 3"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic44.jpeg" alt="Memory 4"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic.2.jpg" alt="Memory 5"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic66.jpeg" alt="Memory 6"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic88.jpeg" alt="Memory 7"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic.3.jpg" alt="Memory 8"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic99.jpeg" alt="Memory 9"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic.1.jpg" alt="Memory 10"onclick="openImage(this.src)"></div>
-      <div class="photo-card"><img src="pic44.jpeg" alt="Memory 11"onclick="openImage(this.src)"></div>
+      <div class="photo-card"><img src="pic33.jpeg" alt="Memory 1" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic55.jpeg" alt="Memory 2" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic77.jpeg" alt="Memory 3" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic44.jpeg" alt="Memory 4" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic.2.jpg" alt="Memory 5" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic66.jpeg" alt="Memory 6" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic88.jpeg" alt="Memory 7" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic.3.jpg" alt="Memory 8" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic99.jpeg" alt="Memory 9" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic.1.jpg" alt="Memory 10" onclick="openLightbox(this.src)"></div>
+      <div class="photo-card"><img src="pic44.jpeg" alt="Memory 11" onclick="openLightbox(this.src)"></div>
       <div class="photo-card">
-        <img src="pic.4.jpeg" alt="Memory 12"onclick="openImage(this.src)">
+        <img src="pic.4.jpeg" alt="Memory 12" onclick="openLightbox(this.src)">
         <p>HBD Fatima! 🎂🎉</p>
       </div>
     </div>
   </div>
+
   <!-- Modal structure for viewing full image -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <span class="close-lightbox">&times;</span>
-  <img class="lightbox-content" id="lightbox-img" alt="Full Image">
-</div>
-   <script src="script.js"></script>
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="close-lightbox">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" alt="Full Image">
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
