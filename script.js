@@ -141,3 +141,14 @@ document.addEventListener("DOMContentLoaded", () => {
         video.addEventListener("ended", checkAndResumeBGM);
     });
 });
+function openImage(element) {
+  var modal = document.getElementById("imageModal");
+  var fullImg = document.getElementById("fullImage");
+  
+  modal.style.display = "flex";
+  fullImg.src = element.src;
+}
+
+function closeImage() {
+  document.getElementById("imageModal").style.display = "none";
+}
